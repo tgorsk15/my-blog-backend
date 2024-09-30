@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
-const passport = require('passport')
+const path = require('path')
+// const passport = require('passport')
+const session = require('express-session');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store')
 const { PrismaClient } = require('@prisma/client');
 
 
 const prisma = new PrismaClient()
 require('dotenv').config();
-require('./auth/passport')
+// require('./auth/passport')
 
 // app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }))
@@ -40,7 +42,7 @@ app.use(session({
 
 // not sure if I need this yet:
 // trigger authentication
-app.use(passport.session())
+// app.use(passport.session())
 
 // might not need this, styling will be on frontend
 const assetsPath = path.join(__dirname, "public")
