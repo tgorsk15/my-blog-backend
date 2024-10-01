@@ -13,7 +13,7 @@ exports.issueToken = async (user, userId) => {
 
     const signedToken = jwt.sign(payload, process.env.JWT_SECRET, 
         { expiresIn: expiresIn })
-    console.log('signed token', signedToken)
+    // console.log('signed token', signedToken)
     
     return {
         token: "Bearer " + signedToken,

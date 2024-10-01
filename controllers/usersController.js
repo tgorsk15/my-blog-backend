@@ -7,14 +7,47 @@ exports.userTest = async (req, res) => {
 }
 
 exports.loginUserPost = async (req, res) => {
-    
+    try {
+        const loginInfo = req.body;
+        const user = await db.findUserByUsername(loginInfo.username)
+
+        if (!user) {
+            res.status(401).json({
+                success: false,
+                msg: "Could not find user. Please check username"
+            })
+        }
+
+        // check to see if password matches
+        const match = await bcrypt.compare(loginInfo.password, user.password)
+        if (match) {
+            // if valid, user can go ahead and recieve a jwt so they don't
+            // have to keep logging in
+            const jwt = await issueJWT.issueToken(user, user.id)
+            console.log('token issued at login', jwt)
+            res.json({
+                success: true,
+                user: user,
+                token: jwt.token,
+                expiresIn: jwt.expires
+            })
+        } else {
+            res.status(401).json({
+                success: false,
+                msg: 'You entered the wrong password'
+            })
+        }
+
+    } catch(err) {
+        console.error('Error in loginUserPost:', err);
+        res.status(500).json({ message: 'An error occurred during login', error: err.message });
+    }
+
 }
 
 exports.signupUserPost = async (req, res) => {
     try {
         let isMain = false
-        
-        console.log(req.body)
         const info = req.body
 
         // checks if user is blog owner
@@ -23,9 +56,8 @@ exports.signupUserPost = async (req, res) => {
         }
         console.log(isMain)
 
-        // has password
+        // hash password and insert into DB
         const hashedPassword = await bcrypt.hash(info.password, 10);
-        // Insert user into database
         const newUser = await db.insertUser(info, hashedPassword, isMain);
          
         // issue the token for user
@@ -34,7 +66,9 @@ exports.signupUserPost = async (req, res) => {
         console.log('token issued', jwt)
 
         res.json({
+            success: true,
             user: newUser,
+            // React needs to take this token and store it in localStorage...
             token: jwt.token,
             expiresIn: jwt.expires
         })

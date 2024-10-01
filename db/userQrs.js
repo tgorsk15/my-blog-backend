@@ -12,6 +12,15 @@ async function findUserByUserById(userId) {
     return user
 }
 
+async function findUserByUsername(username) {
+    const user = await prisma.user.findUnique({
+        where: {
+            username: username,
+        }
+    })
+    return user
+}
+
 async function insertUser(info, hashPassword, isMain) {
     console.log('inserting')
     const user = await prisma.user.create({
@@ -30,5 +39,6 @@ async function insertUser(info, hashPassword, isMain) {
 
 module.exports = {
     findUserByUserById,
+    findUserByUsername,
     insertUser
 }
