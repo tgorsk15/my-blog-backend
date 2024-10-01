@@ -9,13 +9,24 @@ postRouter.get('/', passport.authenticate('jwt', {session: false}), postsControl
 postRouter.post('/create', passport.authenticate('jwt', {session: false}), postsController.postCreatePost)
 
 // edit
-postRouter.post('/edit', passport.authenticate('jwt', {session: false}), postsController.postEditPost)
+postRouter.put('/edit/:postId', passport.authenticate('jwt', {session: false}), postsController.editPostPut)
 
 // remove
-postRouter.post('/remove', passport.authenticate('jwt', {session: false}), postsController.postRemovePost)
+postRouter.delete('/remove/:postId', passport.authenticate('jwt', {session: false}), postsController.postRemoveDelete)
 
 // publish/unpublish
 postRouter.post('/publish/:pblcBoolean', passport.authenticate('jwt', {session: false}), postsController.publicationPost)
+
+// for author viewing:
+// view all posts
+postRouter.get('/viewAll', passport.authenticate('jwt', {session: false}), postsController.viewAllPostsGet)
+
+// primarily for regular users:
+// view
+postRouter.get('/view/:postId', passport.authenticate('jwt', {session: false}), postsController.viewPostGet)
+
+// view all published posts
+postRouter.get('/viewAllPublished', passport.authenticate('jwt', {session: false}), postsController.viewPublishedPostsGet)
 
 
 module.exports = postRouter

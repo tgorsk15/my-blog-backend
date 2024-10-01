@@ -8,11 +8,11 @@ exports.postCreatePost = async (req, res) => {
     res.send('creating post')
 }
 
-exports.postEditPost = async (req, res) => {
+exports.editPostPut = async (req, res) => {
     res.send('editing post and submitting chnages to DB')
 }
 
-exports.postRemovePost = async (req, res) => {
+exports.postRemoveDelete = async (req, res) => {
     res.send('removing post')
 }
 
@@ -21,4 +21,16 @@ exports.publicationPost = async (req, res) => {
     const isPublished = req.params.pblcBoolean
     console.log(isPublished)
     res.send('publish or un-publish the post')
+}
+
+exports.viewPostGet = async (req, res) => {
+    res.send('viewing post')
+}
+
+exports.viewPublishedPostsGet = async (req, res) => {
+    res.send('viewing all published')
+}
+
+exports.viewAllPostsGet = async (req, res) => {
+    res.send('author viewing all posts')
 }
