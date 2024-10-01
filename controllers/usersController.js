@@ -3,13 +3,19 @@ const db = require('../db/userQrs')
 const issueJWT = require('../auth/issueJWT')
 
 exports.userTest = async (req, res) => {
-    res.send('here is user')
+    res.status(200).json({
+        success: true,
+        msg: 'You are authenitcated'
+    })
 }
 
 exports.loginUserPost = async (req, res) => {
     try {
         const loginInfo = req.body;
         const user = await db.findUserByUsername(loginInfo.username)
+
+        // could add check to see if user.username = loginInfo.username
+        // ... send 'already logged in' msg if needed
 
         if (!user) {
             res.status(401).json({

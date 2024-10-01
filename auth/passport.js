@@ -1,7 +1,6 @@
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt
-const bcrypt = require('bcryptjs')
 const db = require('../db/userQrs')
 
 const options = {
@@ -12,7 +11,9 @@ const options = {
 const jwtStrategy = new JwtStrategy(options, async (payload, done) => {
     try {
         const userId = payload.sub;
+        
         const user = await db.findUserByUserById(userId)
+        console.log('user in strategy function', user)
 
         if (user) {
             return done(null, user)
@@ -20,9 +21,12 @@ const jwtStrategy = new JwtStrategy(options, async (payload, done) => {
             return done(null, false)
         }
     } catch (err) {
-
+        done(err, null)
     }
     
 })
 
-passport.use(jwtStrategy)
+passport.use('jwt', jwtStrategy)
+
+
+module.exports = passport

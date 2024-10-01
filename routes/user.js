@@ -1,11 +1,16 @@
 const { Router } = require('express');
 const userRouter = Router();
+const passport = require('passport');
 const usersController = require('../controllers/usersController')
 
-userRouter.get('/', usersController.userTest)
+userRouter.get('/', passport.authenticate('jwt', {session: false}) ,usersController.userTest)
 
 // login
 userRouter.post('/login', usersController.loginUserPost)
+
+// logout
+// will have to remove the JWT fromlocalstorage on the frontend when
+// user logs out
 
 // signup
 
