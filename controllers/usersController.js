@@ -84,3 +84,8 @@ exports.signupUserPost = async (req, res) => {
     }
 
 }
+
+
+exports.logoutUserGet = async (req, res) => {
+    // remove jwt token from localStorage on front end
+}

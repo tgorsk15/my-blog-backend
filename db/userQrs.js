@@ -8,7 +8,6 @@ async function findUserByUserById(userId) {
             id: userId,
         }
     })
-    // console.log('here is user:', user)
     return user
 }
 
@@ -35,6 +34,8 @@ async function insertUser(info, hashPassword, isMain) {
     })
     return user
 }
+
+
 
 
 module.exports = {
