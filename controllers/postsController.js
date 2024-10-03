@@ -5,6 +5,10 @@ exports.postsTest = async (req, res) => {
 }
 
 exports.postCreatePost = async (req, res) => {
+    const sentPost = req.body
+    console.log('req body', sentPost)
+
+    const createdPost = await db.createNewPost(sentPost, req.user.id)
     res.send('creating post')
 }
 

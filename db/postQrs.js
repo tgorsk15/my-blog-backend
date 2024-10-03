@@ -31,7 +31,17 @@ async function createNewPost(postInfo, userId) {
 // TMW 10/3: Build this function, getPublishedPosts function, and whatever else,
 // before moving onto comment queries/controllers
 async function getAllPosts() {
+    const posts = await prisma.post.findMany()
+    return posts
+}
 
+async function getPublishedPosts() {
+    const publishedPosts = await prisma.post.findMany({
+        where: {
+            published: isPublished
+        }
+    })
+    return publishedPosts
 }
 
 async function updatePost(postId, updatedPost) {
@@ -56,23 +66,23 @@ async function changePublication(postId, isPublished) {
             published: isPublished
         }
     })
+    console.log(updatedPost)
 }
 
 async function removePost(postId) {
     const removedPost = await prisma.post.delete({
-    where: {
-        id: postId
-    }
-})
+        where: {
+            id: postId
+        }
+    })
 } 
-
-// TMW 10/2: continue to build out some of these functions beforehand...
-// or continue looking into how dat can be retrieved properly from React
 
 
 module.exports = {
     findPostByTitle,
     createNewPost,
+    getAllPosts,
+    getPublishedPosts,
     updatePost,
     changePublication,
     removePost
