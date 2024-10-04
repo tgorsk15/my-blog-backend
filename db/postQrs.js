@@ -41,7 +41,11 @@ async function createNewPost(postInfo, userId) {
 
 // before moving onto comment queries/controllers
 async function getAllPosts() {
-    const posts = await prisma.post.findMany()
+    const posts = await prisma.post.findMany({
+        include: {
+            comments: true
+        }
+    })
     return posts
 }
 

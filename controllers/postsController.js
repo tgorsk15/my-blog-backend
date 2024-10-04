@@ -32,6 +32,7 @@ exports.publicationPost = async (req, res) => {
 }
 
 exports.viewPostGet = async (req, res) => {
+    
     res.send('viewing post')
 }
 
@@ -39,6 +40,8 @@ exports.viewPublishedPostsGet = async (req, res) => {
     res.send('viewing all published')
 }
 
-exports.viewAllPostsGet = async (req, res) => {
+exports.getAllPostsGet = async (req, res) => {
+    const allPosts = await db.getAllPosts
+    console.log(allPosts)
     res.send('author viewing all posts')
 }
