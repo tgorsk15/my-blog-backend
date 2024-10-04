@@ -1,14 +1,25 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 
+async function findPostById(postId) {
+    const post = await prisma.post.findUnique({
+        where: {
+            id: postId
+        },
+        include: {
+            comments: true
+        }
+    })
+    return post
+}
+
 async function findPostByTitle(title) {
     const post = await prisma.post.findUnique({
         where: {
             title: title
         },
         include: {
-            children: true,
-            files: true
+            comments: true
         }
     })
     return post
@@ -78,6 +89,7 @@ async function removePost(postId) {
 
 
 module.exports = {
+    findPostById,
     findPostByTitle,
     createNewPost,
     getAllPosts,
