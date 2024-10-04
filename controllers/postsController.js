@@ -1,6 +1,7 @@
 const db = require('../db/postQrs')
 
 exports.postsTest = async (req, res) => {
+    console.log(req.user)
     res.send('here is post')
 }
 
@@ -17,6 +18,9 @@ exports.editPostPut = async (req, res) => {
 }
 
 exports.postRemoveDelete = async (req, res) => {
+    const postId = Number(req.params.postId)
+    console.log('post to be deleted', postId)
+    const deletedPost = await db.removePost(postId)
     res.send('removing post')
 }
 

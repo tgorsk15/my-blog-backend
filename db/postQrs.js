@@ -28,7 +28,6 @@ async function createNewPost(postInfo, userId) {
     })
 }
 
-// TMW 10/3: Build this function, getPublishedPosts function, and whatever else,
 // before moving onto comment queries/controllers
 async function getAllPosts() {
     const posts = await prisma.post.findMany()
