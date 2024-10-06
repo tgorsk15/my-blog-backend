@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require("cors");
 const path = require('path')
 const passport = require('passport')
 const session = require('express-session');
@@ -11,8 +12,15 @@ const prisma = new PrismaClient()
 require('dotenv').config();
 require('./auth/passport')
 
-// app.set("view engine", "ejs");
+
 app.use(express.urlencoded({ extended: true }))
+app.use(
+    cors({
+        origin: [
+            "http://localhost:5173"
+        ]
+    })
+)
 
 // import routers here
 const indexRouter = require('./routes/index')
