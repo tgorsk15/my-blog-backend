@@ -19,7 +19,7 @@ exports.loginUserPost = async (req, res) => {
         // ... send 'already logged in' msg if needed
 
         if (!user) {
-            res.status(401).json({
+            return res.status(401).json({
                 success: false,
                 msg: "Could not find user. Please check username"
             })
@@ -31,14 +31,14 @@ exports.loginUserPost = async (req, res) => {
             // if valid, user can go ahead and recieve a jwt token
             const jwt = await issueJWT.issueToken(user, user.id)
             console.log('token issued at login', jwt)
-            res.json({
+            return res.json({
                 success: true,
                 user: user,
                 token: jwt.token,
                 expiresIn: jwt.expires
             })
         } else {
-            res.status(401).json({
+            return res.status(401).json({
                 success: false,
                 msg: 'You entered the wrong password'
             })
