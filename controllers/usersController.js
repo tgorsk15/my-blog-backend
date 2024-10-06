@@ -12,6 +12,7 @@ exports.userTest = async (req, res) => {
 exports.loginUserPost = async (req, res) => {
     try {
         const loginInfo = req.body;
+        console.log('given credentials', loginInfo)
         const user = await db.findUserByUsername(loginInfo.username)
 
         // could add check to see if user.username = loginInfo.username

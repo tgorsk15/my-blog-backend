@@ -12,7 +12,7 @@ const prisma = new PrismaClient()
 require('dotenv').config();
 require('./auth/passport')
 
-
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(
     cors({
