@@ -19,7 +19,7 @@ postRouter.post('/publish/:pblcBoolean', passport.authenticate('jwt', {session: 
 
 // for author viewing:
 // view all posts
-postRouter.get('/viewAll', passport.authenticate('jwt', {session: false}), postsController.viewAllPostsGet)
+postRouter.get('/getAll', passport.authenticate('jwt', {session: false}), postsController.getAllPostsGet)
 
 // primarily for regular users:
 // view

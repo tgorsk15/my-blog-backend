@@ -27,8 +27,7 @@ exports.loginUserPost = async (req, res) => {
         // check to see if password matches
         const match = await bcrypt.compare(loginInfo.password, user.password)
         if (match) {
-            // if valid, user can go ahead and recieve a jwt so they don't
-            // have to keep logging in
+            // if valid, user can go ahead and recieve a jwt token
             const jwt = await issueJWT.issueToken(user, user.id)
             console.log('token issued at login', jwt)
             res.json({
