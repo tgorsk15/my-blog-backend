@@ -15,7 +15,7 @@ postRouter.put('/edit/:postId', passport.authenticate('jwt', {session: false}), 
 postRouter.delete('/remove/:postId', passport.authenticate('jwt', {session: false}), postsController.postRemoveDelete)
 
 // publish/unpublish
-postRouter.post('/publish/:pblcBoolean', passport.authenticate('jwt', {session: false}), postsController.publicationPost)
+postRouter.post('/publish/:postId/:pblcBoolean', passport.authenticate('jwt', {session: false}), postsController.publicationPost)
 
 // for author viewing:
 // view all posts

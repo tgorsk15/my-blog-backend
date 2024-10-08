@@ -26,8 +26,14 @@ exports.postRemoveDelete = async (req, res) => {
 
 exports.publicationPost = async (req, res) => {
     // use the below to change 'published' in DB
-    const isPublished = req.params.pblcBoolean
-    console.log(isPublished)
+    // const isPublished = req.params.pblcBoolean
+    // console.log(isPublished)
+    const postId = Number(req.params.postId)
+    const isPublished = Boolean(req.params.pblcBoolean)
+    console.log(postId, isPublished)
+
+    await db.changePublication(postId, isPublished)
+    
     res.send('publish or un-publish the post')
 }
 
