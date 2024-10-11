@@ -25,6 +25,8 @@ exports.loginUserPost = async (req, res) => {
             })
         }
 
+        // possibly install form validation later with express validator...
+
         // check to see if password matches
         const match = await bcrypt.compare(loginInfo.password, user.password)
         if (match) {
@@ -56,11 +58,24 @@ exports.signupUserPost = async (req, res) => {
         let isMain = false
         const info = req.body
 
-        // checks if user is blog owner
-        if (info.password === process.env.AUTHOR_CODE) {
-            isMain = true
+        // check for repeat
+        const users = await db.getAllUsers();
+        const userExists = users.find(user => user.username === info.username)
+        const emailExists = users.find(user => user.email === info.email)
+
+        if (userExists) {
+            return res.status(401).json({
+                success: false,
+                msg: 'This username already exists'
+            })
+        } else if (emailExists) {
+            return res.status(401).json({
+                success: false,
+                msg: 'This email already exists'
+            })
         }
-        console.log(isMain)
+
+        // possibly install form validation later with express validator...
 
         // hash password and insert into DB
         const hashedPassword = await bcrypt.hash(info.password, 10);
@@ -74,7 +89,7 @@ exports.signupUserPost = async (req, res) => {
         res.json({
             success: true,
             user: newUser,
-            // React needs to take this token and store it in localStorage...
+            // might not need to return a token... token is issued at login
             token: jwt.token,
             expiresIn: jwt.expires
         })

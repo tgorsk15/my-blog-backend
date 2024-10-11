@@ -20,6 +20,11 @@ async function findUserByUsername(username) {
     return user
 }
 
+async function getAllUsers() {
+    const users = await prisma.user.findMany()
+    return users
+}
+
 async function insertUser(info, hashPassword, isMain) {
     console.log('inserting')
     const user = await prisma.user.create({
@@ -41,5 +46,6 @@ async function insertUser(info, hashPassword, isMain) {
 module.exports = {
     findUserByUserById,
     findUserByUsername,
+    getAllUsers,
     insertUser
 }

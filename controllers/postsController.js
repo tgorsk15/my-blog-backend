@@ -25,9 +25,6 @@ exports.postRemoveDelete = async (req, res) => {
 }
 
 exports.publicationPost = async (req, res) => {
-    // use the below to change 'published' in DB
-    // const isPublished = req.params.pblcBoolean
-    // console.log(isPublished)
     const postId = Number(req.params.postId)
     const isPublished = Boolean(req.params.pblcBoolean)
     console.log(postId, isPublished)
@@ -38,12 +35,21 @@ exports.publicationPost = async (req, res) => {
 }
 
 exports.viewPostGet = async (req, res) => {
-    
-    res.send('viewing post')
+    const postId = Number(req.params.postId)
+    const post = await db.findPostById(postId)
+    console.log('requested post', post)
+
+    return res.json({
+        post: post
+    })
 }
 
 exports.viewPublishedPostsGet = async (req, res) => {
-    res.send('viewing all published')
+    const pblcPosts = await db.getPublishedPosts()
+    console.log(pblcPosts)
+    return res.json({
+        posts: pblcPosts
+    })
 }
 
 exports.getAllPostsGet = async (req, res) => {
