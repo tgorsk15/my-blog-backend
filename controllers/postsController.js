@@ -53,7 +53,7 @@ exports.viewPublishedPostsGet = async (req, res) => {
 }
 
 exports.getAllPostsGet = async (req, res) => {
-    const allPosts = await db.getAllPosts
+    const allPosts = await db.getAllPosts()
     console.log(allPosts)
     return res.json({
         posts: allPosts
