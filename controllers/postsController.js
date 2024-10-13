@@ -24,14 +24,25 @@ exports.postRemoveDelete = async (req, res) => {
     res.send('removing post')
 }
 
+
+// 10/13: left off here... Boolean() is converting to true everytime
+// ... need to fix tmw, ask Claude
 exports.publicationPost = async (req, res) => {
+    let isPublished;
     const postId = Number(req.params.postId)
-    const isPublished = Boolean(req.params.pblcBoolean)
+    console.log('before conversion', req.params.pblcBoolean)
+    if (req.params.pblcBoolean === 'true') {
+        isPublished = true
+    } else if (req.params.pblcBoolean === 'false') {
+        isPublished = false
+    }
     console.log(postId, isPublished)
 
     await db.changePublication(postId, isPublished)
     
-    res.send('publish or un-publish the post')
+    res.json({
+        success: true
+    })
 }
 
 exports.viewPostGet = async (req, res) => {
