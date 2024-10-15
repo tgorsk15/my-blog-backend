@@ -39,7 +39,7 @@ async function createNewPost(postInfo, userId) {
     })
 }
 
-// before moving onto comment queries/controllers
+
 async function getAllPosts() {
     const posts = await prisma.post.findMany({
         include: {
@@ -81,6 +81,7 @@ async function changePublication(postId, isPublished) {
         }
     })
     console.log(updatedPost)
+    return updatedPost
 }
 
 async function removePost(postId) {

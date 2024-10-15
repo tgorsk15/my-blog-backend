@@ -25,8 +25,6 @@ exports.postRemoveDelete = async (req, res) => {
 }
 
 
-// 10/13: left off here... Boolean() is converting to true everytime
-// ... need to fix tmw, ask Claude
 exports.publicationPost = async (req, res) => {
     let isPublished;
     const postId = Number(req.params.postId)
@@ -38,10 +36,11 @@ exports.publicationPost = async (req, res) => {
     }
     console.log(postId, isPublished)
 
-    await db.changePublication(postId, isPublished)
+    const updatedPost = await db.changePublication(postId, isPublished)
     
     res.json({
-        success: true
+        success: true,
+        updatedPost: updatedPost
     })
 }
 
