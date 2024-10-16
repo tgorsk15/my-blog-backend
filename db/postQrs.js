@@ -25,18 +25,19 @@ async function findPostByTitle(title) {
     return post
 }
 
-async function createNewPost(postInfo, userId) {
+async function createNewPost(postInfo) {
     const post = await prisma.post.create({
         data: {
             title: postInfo.title,
             content: postInfo.content,
             user: {
                 connect: {
-                    id: userId
+                    id: postInfo.userId
                 }
             }
         }
     })
+    return post
 }
 
 
