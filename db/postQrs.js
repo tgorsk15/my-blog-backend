@@ -65,8 +65,8 @@ async function updatePost(postId, updatedPost) {
             id: postId
         },
         data: {
-            title: updatePost.title,
-            content: updatePost.content
+            title: updatedPost.newTitle,
+            content: updatedPost.newContent
         }
     })
     console.log('updated post', postUpdated)

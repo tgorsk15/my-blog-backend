@@ -18,7 +18,10 @@ exports.postCreatePost = async (req, res) => {
 }
 
 exports.editPostPut = async (req, res) => {
-    res.send('editing post and submitting chnages to DB')
+    const postId = Number(req.params.postId)
+    const postInfo = req.body
+    const updatedPost = await db.updatePost(postId, postInfo)
+    res.json('all done')
 }
 
 exports.postRemoveDelete = async (req, res) => {
