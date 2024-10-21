@@ -1,13 +1,18 @@
+const userDb = require('./userQrs')
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 
-async function createNewComment(commentInfo, postId, userId) {
+async function createNewComment(commentInfo, postId) {
+    const currentUser = await userDb.findUserByUserById(commentInfo.userId)
+    console.log('user searched for in DB:', currentUser)
+
     const comment = await prisma.comment.create({
         data: {
-            content: commentInfo.content,
+            content: commentInfo.commentContent,
+            username: currentUser.username,
             user: {
                 connect: {
-                    id: userId
+                    id: commentInfo.userId
                 }
             },
             post: {

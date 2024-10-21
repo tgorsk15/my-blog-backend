@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "darwin-arm64"]
 }
 
 datasource db {
@@ -50,11 +51,15 @@ model Comment {
   createdAt DateTime @default(now())
   likes     Int      @default(0)
   dislikes  Int      @default(0)
+  username  String   @default("Unspecified user")
   user      User     @relation(fields: [ownerId], references: [id])
   ownerId   Int
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
 }
+
+// need to runprisma migrate
+
 
 
 

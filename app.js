@@ -22,6 +22,17 @@ app.use(
     })
 )
 
+// temp testing code:
+// app.use((req, res, next) => {
+//     console.log('Incoming request:', {
+//         method: req.method,
+//         path: req.path,
+//         headers: req.headers,
+//         body: req.body
+//     });
+//     next();
+// });
+
 // import routers here
 const indexRouter = require('./routes/index')
 const userRouter = require('./routes/user')
@@ -47,10 +58,6 @@ app.use(session({
         maxAge: 7 * 24 * 60 * 60 * 1000
     }
 }))
-
-// not sure if I need this yet:
-// trigger authentication
-// app.use(passport.session())
 
 // might not need this, styling will be on frontend
 const assetsPath = path.join(__dirname, "public")

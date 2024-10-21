@@ -8,14 +8,18 @@ exports.commentTest = async (req, res) => {
 exports.createCommentPost = async (req, res) => {
     const postId = Number(req.params.postId)
     const commentInfo = req.body
+    console.log('here is commentInfo and postId', commentInfo, postId)
 
-    await db.createNewComment(commentInfo, postId, req.user.id)
+    await db.createNewComment(commentInfo, postId)
     // have this just to test post shows comments correctly
     const activePost = await dbPosts.findPostById(postId)
     console.log(activePost)
     //
 
-    res.send(`created comment on post: ${postId}`)
+    res.json({
+        success: true,
+        post: activePost
+    })
 }
 
 exports.removeCommentDelete = async (req, res) => {
