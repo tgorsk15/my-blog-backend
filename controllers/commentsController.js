@@ -14,7 +14,6 @@ exports.createCommentPost = async (req, res) => {
     // have this just to test post shows comments correctly
     const activePost = await dbPosts.findPostById(postId)
     console.log(activePost)
-    //
 
     res.json({
         success: true,
@@ -39,17 +38,42 @@ exports.removeCommentDelete = async (req, res) => {
 }
 
 exports.likeCommentPut = async (req, res) => {
+    console.log('liking')
     const commentId = Number(req.params.commentId)
-    const likeAmount = req.body.likes
-    res.send('liked the comment')
-    // need to somehow figure out how to disable both like and dislike
-    // buttons when the user clicks, and then also store that in memory
-    // somehow that the user has either clicked or clicked the like off
-    // seems complicated... maybe hold off on this till the end
+    const currentLikes = req.body.likes
+    console.log('current amount', currentLikes)
+
+    const newComment = await db.likeComment(commentId)
+    console.log(newComment)
+    res.json({
+        success: true,
+        newComment: newComment
+    })
 }
 
+// TMW 10/22: continue to build out like/dislike system
+// ... need to also set up system that prevents double likes or double
+// dislikes... can't disable it entirely
+
 exports.dislikeCommentPut = async (req, res) => {
+    console.log('disliking')
     const commentId = Number(req.params.commentId)
-    const dislikeAmount = req.body.likes
-    res.send('disliked the comment')
+    const currentLikes = req.body.likes
+
+    if (currentLikes === 0) {
+        console.log('already at zero')
+        return res.json({
+            success: true,
+            msg: 'already at zero'
+        })
+    }
+    console.log('current amount', currentLikes)
+
+    const newComment = await db.dislikeComment(commentId)
+    console.log(newComment)
+
+    res.json({
+        success: true,
+        newComment: newComment
+    })
 }

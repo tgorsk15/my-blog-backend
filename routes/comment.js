@@ -15,6 +15,6 @@ commentRouter.delete('/remove/:commentId', passport.authenticate('jwt', {session
 commentRouter.put('/like/:commentId', commentsController.likeCommentPut)
 
 // unlike comment
-commentRouter.put('unlike/:commentId', commentsController.dislikeCommentPut)
+commentRouter.put('/unlike/:commentId', commentsController.dislikeCommentPut)
 
 module.exports = commentRouter

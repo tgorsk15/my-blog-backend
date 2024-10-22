@@ -32,8 +32,38 @@ async function removeComment(commentId) {
     })
 }
 
+async function likeComment(commentId) {
+    const updatedComment = await prisma.comment.update({
+        where: {
+            id: commentId
+        },
+        data: {
+            likes: {
+                increment: 1
+            }
+        }
+    })
+    return updatedComment
+}
+
+async function dislikeComment(commentId) {
+    const updatedComment = await prisma.comment.update({
+        where: {
+            id: commentId
+        },
+        data: {
+            likes: {
+                decrement: 1
+            }
+        }
+    })
+    return updatedComment
+}
+
 
 module.exports = {
     createNewComment,
-    removeComment
+    removeComment,
+    likeComment,
+    dislikeComment
 }
