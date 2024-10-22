@@ -7,7 +7,11 @@ async function findPostById(postId) {
             id: postId
         },
         include: {
-            comments: true
+            comments: {
+                orderBy: {
+                    createdAt: 'asc'
+                }
+            }
         }
     })
     return post
@@ -19,7 +23,11 @@ async function findPostByTitle(title) {
             title: title
         },
         include: {
-            comments: true
+            comments: {
+                orderBy: {
+                    createdAt: 'asc'
+                }
+            }
         }
     })
     return post
