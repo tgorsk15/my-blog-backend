@@ -4,7 +4,7 @@ exports.issueToken = async (user, userId) => {
     // Get auth header value (we want to send the token through our header)
     // const bearerHeader = req.headers['authorization'];
     const id = userId
-    const expiresIn = '3d'
+    const expiresIn = 20
 
     const payload = {
         sub: id,

@@ -48,7 +48,9 @@ exports.loginUserPost = async (req, res) => {
 
     } catch(err) {
         console.error('Error in loginUserPost:', err);
-        res.status(500).json({ message: 'An error occurred during login', error: err.message });
+        res.status(500).json({ 
+            message: 'An error occurred during login', error: err.message 
+        });
     }
 
 }
