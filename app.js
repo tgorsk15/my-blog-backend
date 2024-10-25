@@ -60,8 +60,8 @@ app.use(session({
 }))
 
 // might not need this, styling will be on frontend
-const assetsPath = path.join(__dirname, "public")
-app.use(express.static(assetsPath))
+// const assetsPath = path.join(__dirname, "public")
+// app.use(express.static(assetsPath))
 
 // use routers here
 app.use("/", indexRouter)

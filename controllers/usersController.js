@@ -25,8 +25,6 @@ exports.loginUserPost = async (req, res) => {
             })
         }
 
-        // possibly install form validation later with express validator...
-
         // check to see if password matches
         const match = await bcrypt.compare(loginInfo.password, user.password)
         if (match) {
@@ -102,7 +100,3 @@ exports.signupUserPost = async (req, res) => {
 
 }
 
-
-exports.logoutUserGet = async (req, res) => {
-    // remove jwt token from localStorage on front end
-}

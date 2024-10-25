@@ -58,7 +58,6 @@ model Comment {
   postId    Int
 }
 
-// need to runprisma migrate
 
 
 
