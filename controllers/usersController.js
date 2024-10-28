@@ -64,7 +64,7 @@ exports.loginUserPost = async (req, res) => {
         } else {
             return res.status(401).json({
                 success: false,
-                msg: 'You entered the wrong password'
+                msg: 'Incorrect Password, please try again'
             })
         }
 
