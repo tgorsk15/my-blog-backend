@@ -8,15 +8,7 @@ userRouter.get('/', passport.authenticate('jwt', {session: false}), usersControl
 // login
 userRouter.post('/login', usersController.loginUserPost)
 
-// logout
-// will have to remove the JWT from localstorage on the frontend when
-// user logs out
-
 // signup
-
-// dont think I need this:
-// userRouter.get('/signup', usersController.signupUserGet)
-
 userRouter.post('/signup', usersController.signupUserPost)
 
 module.exports = userRouter
