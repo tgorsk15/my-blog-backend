@@ -11,7 +11,7 @@ exports.postCreatePost = async (req, res) => {
     // want body to include title and content
     console.log('req body', sentPost)
 
-    const createdPost = await db.createNewPost(sentPost, req.user.id)
+    const createdPost = await db.createNewPost(sentPost)
     res.json({
         createdPost: createdPost
     })

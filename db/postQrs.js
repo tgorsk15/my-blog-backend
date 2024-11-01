@@ -38,6 +38,7 @@ async function createNewPost(postInfo) {
         data: {
             title: postInfo.title,
             content: postInfo.content,
+            preview: postInfo.preview,
             user: {
                 connect: {
                     id: postInfo.userId
