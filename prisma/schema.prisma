@@ -37,6 +37,7 @@ model Post {
   id        Int       @id @default(autoincrement())
   title     String
   content   String    @db.Text
+  preview   String    @db.Text @default("")
   published Boolean   @default(false)
   createdAt DateTime  @default(now())
   user      User      @relation(fields: [ownerId], references: [id])
