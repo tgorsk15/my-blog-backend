@@ -17,10 +17,12 @@ app.use(
     cors({
         origin: [
             "http://localhost:5173",
-            "https://thedailycoder.netlify.app/"
+            "https://thedailycoder.netlify.app"
         ]
     })
 )
+// left off here: figure out why this isn't working, what is going wrong with CORS?
+// ask CLaude?
 
 // import routers here
 const indexRouter = require('./routes/index')
