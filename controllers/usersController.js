@@ -37,7 +37,6 @@ exports.userTest = async (req, res) => {
 exports.loginUserPost = async (req, res) => {
     try {
         const loginInfo = req.body;
-        console.log('given credentials', loginInfo)
         const user = await db.findUserByUsername(loginInfo.username)
 
 
@@ -54,7 +53,6 @@ exports.loginUserPost = async (req, res) => {
         if (match) {
             // if valid, user can go ahead and recieve a jwt token
             const jwt = await issueJWT.issueToken(user, user.id)
-            console.log('token issued at login', jwt)
             return res.json({
                 success: true,
                 user: user,
@@ -104,7 +102,6 @@ exports.signupUserPost = [
 
             // check for errors in submitted account info:
             if (!errors.isEmpty()) {
-                console.log('errors with signup:', errors)
                 return res.status(400).json({
                     success: false,
                     errors: errors.array()
@@ -116,7 +113,6 @@ exports.signupUserPost = [
             const newUser = await db.insertUser(info, hashedPassword, isMain);
             
             // issue the token for user
-            console.log('newUser', newUser)
             const jwt = await issueJWT.issueToken(newUser, newUser.id)
             console.log('token issued', jwt)
 

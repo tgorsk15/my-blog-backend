@@ -78,7 +78,6 @@ async function updatePost(postId, updatedPost) {
             content: updatedPost.newContent
         }
     })
-    console.log('updated post', postUpdated)
 }
 
 async function changePublication(postId, isPublished) {
@@ -90,7 +89,6 @@ async function changePublication(postId, isPublished) {
             published: isPublished
         }
     })
-    console.log(updatedPost)
     return updatedPost
 }
 

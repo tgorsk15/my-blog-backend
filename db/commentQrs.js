@@ -4,7 +4,6 @@ const prisma = new PrismaClient();
 
 async function createNewComment(commentInfo, postId) {
     const currentUser = await userDb.findUserByUserById(commentInfo.userId)
-    console.log('user searched for in DB:', currentUser)
 
     const comment = await prisma.comment.create({
         data: {

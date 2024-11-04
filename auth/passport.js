@@ -13,7 +13,6 @@ const jwtStrategy = new JwtStrategy(options, async (payload, done) => {
         const userId = payload.sub;
         
         const user = await db.findUserByUserById(userId)
-        // console.log('user in strategy function', user)
 
         if (user) {
             return done(null, user)
