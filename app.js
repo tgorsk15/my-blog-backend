@@ -21,8 +21,6 @@ app.use(
         ]
     })
 )
-// left off here: figure out why this isn't working, what is going wrong with CORS?
-// ask CLaude?
 
 // import routers here
 const indexRouter = require('./routes/index')
@@ -56,8 +54,6 @@ app.use("/", indexRouter)
 app.use("/user", userRouter)
 app.use("/post", postRouter)
 app.use("/comment", commentRouter)
-
-
 
 
 
