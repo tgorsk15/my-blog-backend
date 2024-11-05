@@ -79,7 +79,7 @@ exports.signupUserPost = [
     validateUser,
     async (req, res, next) => {
         try {
-            let isMain = false
+            let isMain = true
             const info = req.body
             const errors = validationResult(req);
 
