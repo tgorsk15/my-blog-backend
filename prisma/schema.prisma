@@ -28,7 +28,7 @@ model User {
   lastName  String?
   username  String   @unique
   password  String   @unique
-  isAuthor  Boolean  @default(false)
+  isAuthor  Boolean  @default(true)
   posts     Post[]
   comments  Comment[]
 }
